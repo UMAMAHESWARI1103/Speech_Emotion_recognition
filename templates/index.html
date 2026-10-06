@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speech Emotion Recognition</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            text-align: center;
+            padding-top: 60px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            animation: bounceIn 1s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            60% { transform: scale(1.15); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        input[type="file"] {
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            margin-top: 20px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #2575fc;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e2e2e2;
+            transform: scale(1.05);
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 26px;
+        }
+
+        img {
+            margin-top: 20px;
+            border-radius: 12px;
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🎤 Speech Emotion Recognition</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".wav" required>
+        <br><br>
+        <input type="submit" value="Predict Emotion">
+    </form>
+
+    {% if prediction %}
+        <h3>Predicted Emotion: <span>{{ emoji }} {{ prediction }}</span></h3>
+
+        <h3>🔊 Listen to the Uploaded Audio</h3>
+        <audio controls>
+            <source src="{{ audio_url }}" type="audio/wav">
+        </audio>
+
+        <h3>📈 Audio Waveform</h3>
+        <img src="{{ waveform_url }}" alt="Waveform">
+    {% endif %}
+
+</body>
+</html>
